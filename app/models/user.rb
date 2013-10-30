@@ -17,7 +17,11 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, format: { with: /^[\w\.+-]+@([\w]+\.)+[a-zA-Z]+$/}
   validates :username, presence: true, uniqueness: true
   validates :name, presence: true
-
+  validates_length_of :name, :maximum => 25
+  validates_length_of :username, :maximum => 25
+  validates_length_of :email, :maximum => 254
+  validates_length_of :password, :maximum => 256
+  validates_length_of :password_confirmation, :maximum => 256
   def following? user
     self.followeds.include? user
   end
